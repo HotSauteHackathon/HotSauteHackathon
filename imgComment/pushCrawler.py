@@ -2,7 +2,7 @@
 
 '''
 input: hash tag or URL of certain post
-output: Lists of pusher_name, push_time, push_content
+output: Lists of pusher_name, push_time, push_content, push_type
 '''
 import re
 import urllib
@@ -28,8 +28,10 @@ class pushCrawler(object):
             # push-tag">推 </span>
             pushType = re.findall('push-tag">(.+?) <',floor)[0]
 
-            pushDict = {'pusher_name':pusherName, 'push_time':pushTime,
-            'push_content':pushContent.decode('utf-8'),'push_type':pushType.decode('utf-8')}
+            pushDict = {'pusher_name':pusherName,
+             'push_time':pushTime,
+            'push_content':pushContent.decode('utf-8'),
+            'push_type':pushType.decode('utf-8')}
             push_list.append(pushDict)
             push_counter = push_counter +1
 
