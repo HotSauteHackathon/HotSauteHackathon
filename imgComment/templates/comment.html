@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 {% block title %} Image Comment {%endblock%}
 {% block content %}
+{% load staticfiles %}
 
 <div class="header">
     <nav>
@@ -17,7 +18,8 @@
     <p class="lead" style="font-weight: bold;">{{ image.title }}</p>
     <br>
     <img src="/static/img/0eb213c498956d25583179f60f703a5b.jpg" style="width: 100%">
-    <!-- <img src="{{ image.origFile }}"> -->
+    <img src="{{ image.origFile }}">
+    <img src="{% static '2015-12-26/NuJEEkuHB4sTGLjvpvF9EbYmxP29qK7mR88tnoNJ.jpg' %}">
     <br><br>
     <div class="row marketing">
         <div class="col-xs-2">
