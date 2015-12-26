@@ -33,21 +33,21 @@ def edit(request,fileID):
             title = form.cleaned_data["title"]
             content = form.cleaned_data["content"]
 
-            # handle the edit image
-            fh = FileHandler()
-            imgFilePath = fh.handle_uploaded_file(request.FILES['file'])
+##            # handle the edit image
+##            fh = FileHandler()
+##            imgFilePath = fh.handle_uploaded_file(request.FILES['file'])
 
             # upload to imgur
             imgur = ImgurUploader()
             imageUrl = imgur.upload(image.origFile)
 
-            # automatically post
-            ptt = ptt_post()
-            postUrl = ptt.to_post(title,content,imageUrl)
+##            # automatically post
+##            ptt = ptt_post()
+##            postUrl = ptt.to_post(title,content,imageUrl)
 
             # update image object
-            image.editFile = imgFilePath
-            image.postUrl = postUrl
+            #image.editFile = imgFilePath
+            #image.postUrl = postUrl
             image.imageUrl = imageUrl
             image.title = title
             image.content = content
@@ -58,10 +58,11 @@ def edit(request,fileID):
     return render_to_response('edit.html',RequestContext(request,locals()))
 
 def browse(request):
-    comments = Comment.objects.order_by('-uploadTime')
+    images = Image.objects.order_by('-uploadTime')
     return render_to_response('browse.html',RequestContext(request,locals()))
 
-def comment(request):
+def comment(request,fileID):
+    image = Image.objects.get(id=fileID)
     return render_to_response('comment.html',RequestContext(request,locals()))
 
 

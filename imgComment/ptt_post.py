@@ -43,7 +43,7 @@ class ptt_post:
 	    self.telnet.write('\033[A')
 	    self.telnet.write('\033[A')
 	    self.telnet.write('\033[A')
-	 
+
 	def key_down(self):
 	    self.telnet.write('\033[B')
 
@@ -51,13 +51,13 @@ class ptt_post:
 	    self.telnet.write('\033[C')
 
 	def key_left(self):
-	    self.telnet.write('\033[D')    
+	    self.telnet.write('\033[D')
 
 	def key_s(self):
-		self.telnet.write('s') 
+		self.telnet.write('s')
 
 	def key_0(self):
-		self.telnet.write('0') 
+		self.telnet.write('0')
 
 	def key_Q(self):
 		self.telnet.write('Q')
@@ -75,22 +75,22 @@ class ptt_post:
 	    self.key_left()
 	    self.key_left()
 	    self.key_left()
-	 
+
 	    self.telnet.write('G\r')
 	    login_status = self.telnet.read_until('[N]', 3)
-	 
-	    print login_status
-	 
+
+	    #print login_status
+
 	    self.telnet.write('y\r\r')
 	    self.telnet.close()
 
 	def to_post(self,title_s,text_s,url_s):
 		command_index = 0
-		title_text = u'[互動] '+title_s.decode('utf8')
+		title_text = u'[互動] '+title_s
 		title = title_text.encode('big5')
-		content_text = text_s.decode('utf8')
+		content_text = text_s
 		content = content_text.encode('big5')
-		url = url_s.decode('utf8').encode('big5')
+		url = url_s.encode('big5')
 		command_lst = ['PlayImage','qlkza',' ','up','up','_s_','test','up','up','ctrl_p',' ',title,content,url,'ctrl_x','s','up','11111','up3','_Q_']
 
 
@@ -110,15 +110,15 @@ class ptt_post:
 			# data = telnet.read_eager()
 			# data = telnet.read_some()
 			os.system('clear')
-			print "--------------"
-			print data
-			print "--------------"
+			#print "--------------"
+			#print data
+			#print "--------------"
 			if command == "_Q_":
 				index_start = data.find("https:")
 				index_end = data.find(".html")+5
-				print index_start, "  ", index_end
+				#print index_start, "  ", index_end
 				sub_str = data[index_start:index_end]
-				print len(sub_str),sub_str
+				#print len(sub_str),sub_str
 				url = sub_str
 				self.disconnect()
 				return url
