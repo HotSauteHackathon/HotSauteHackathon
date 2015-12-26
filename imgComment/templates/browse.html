@@ -16,6 +16,32 @@
 <div class="jumbotron">
     <p class="lead">快來看看鄉民們設計了什麼對白！
 </div>
+<table class = "browse_images" rules="all" cellpadding='5'>
+    <tr>
+        <th>image id</th>
+        <th>title</th>
+        <th>content</th>
+        <th>upload time</th>
+        <th>image url</th>
+        <th>comments</th>
+    </tr>
+
+    {% for img in images %}
+    <tr>
+        <td>{{img.id}}</td>
+        <td>{{img.title}}</td>
+        <td>{{img.content}}</td>
+        <td>{{img.uploadTime}}</td>
+        {% if img.imageUrl == "None" %}
+            <td>None</td>
+        {% else %}
+            <td><a href="{{img.imageUrl}}">{{img.imageUrl}}</a></td>
+        {% endif %}
+        <td><a href="/comment/{{img.id}}/">View Comments</a></td>
+    </tr>
+    {% endfor %}
+
+</table>
 <div class="row marketing">
 
     <div class="col-lg-4">
