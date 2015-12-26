@@ -65,8 +65,12 @@ def browse(request):
 
 def comment(request,fileID):
     image = Image.objects.get(id=fileID)
+    #comments = [comm.text for comm in image.comment_set.all()]
+    comments = ["dd","sss"]
+
 ##    pc = pushCrwaler(image.postUrl)
 ##    postList = pc.get()
     return render_to_response('comment.html',RequestContext(request,locals()))
+    #return render_template_to_response('comment.html',{"comments":comments})
 
 

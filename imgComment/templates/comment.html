@@ -29,7 +29,7 @@
 
 {% block script %}
 <script>
-    var comments = ['hihi', 'haha', 'kerker'];
+    var comments = {{comments}};
     var comments_nums = comments.length;
     var index = 0;
     $('h2').text(comments[index]);
