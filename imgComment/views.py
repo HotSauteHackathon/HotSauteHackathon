@@ -5,7 +5,7 @@ from django.template import RequestContext
 from imgComment.fileHandler import FileHandler
 from imgComment.ptt_post import ptt_post
 from imgComment.img_uploader import ImgurUploader
-from imgComment.pushCrawler import pushCrwaler
+from imgComment.pushCrawler import pushCrawler
 from imgComment.models import *
 from imgComment.forms import *
 
