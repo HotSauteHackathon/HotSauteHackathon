@@ -21,7 +21,7 @@ class FileHandler():
 
         # write the image file
         fileType = "."+f.name.split(".")[-1]
-        tempFileName = os.path.join(todayDir,self.random_str()+'.'+fileType)
+        tempFileName = os.path.join(todayDir,self.random_str()+fileType)
         with open(tempFileName, 'wb+') as destination:
             for chunk in f.chunks():
                 destination.write(chunk)
