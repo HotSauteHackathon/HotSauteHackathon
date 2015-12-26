@@ -5,6 +5,7 @@ from django.template import RequestContext
 from imgComment.fileHandler import FileHandler
 from imgComment.ptt_post import ptt_post
 from imgComment.img_uploader import ImgurUploader
+from imgComment.pushCrawler import pushCrwaler
 from imgComment.models import *
 from imgComment.forms import *
 
@@ -64,6 +65,8 @@ def browse(request):
 
 def comment(request,fileID):
     image = Image.objects.get(id=fileID)
+##    pc = pushCrwaler(image.postUrl)
+##    postList = pc.get()
     return render_to_response('comment.html',RequestContext(request,locals()))
 
 
