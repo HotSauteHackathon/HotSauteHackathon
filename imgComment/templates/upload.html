@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% block title %} Image Comment {%endblock%}
+{% block content %}
+
+<h1>Upload</h1>
+<br>
+<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+  {{form.as_p}}
+  <div class="submit">
+    <input type="submit" value="Upload!!" class="btn btn-primary"/>
+  </div>
+
+</form>
+{%endblock%}
+
