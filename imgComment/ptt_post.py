@@ -95,6 +95,7 @@ class ptt_post:
 
 		# title_text = u'[互動] '+title_s.decode('utf8')
 		title_text = u'[互動] '+title_s
+
 		# title = title_text.encode('big5')
 		title = title_text
 		# content_text = text_s.decode('utf8')
@@ -151,6 +152,7 @@ class ptt_post:
 					print(type(command))
 					temp = command+'\r'
 					print("----temp:"+temp)
+
 					temp = temp.encode("big5")
 					print(b"----temp:"+temp)
 					self.telnet.write(temp)
