@@ -25,18 +25,22 @@ class pushCrawler(object):
             pushTime = re.findall('push-ipdatetime">(.+)',floor)[0]
             # push-content">: 你好</span>
             pushContent = re.findall('push-content">: (.+?)</span',floor)[0]
+            # push-tag">推 </span>
+            pushType = re.findall('push-tag">(.+?) <',floor)[0]
 
-            pushDict = {'pusher_name':pusherName, 'push_time':pushTime,'push_content':pushContent.decode('utf-8')}
+            pushDict = {'pusher_name':pusherName, 'push_time':pushTime,
+            'push_content':pushContent.decode('utf-8'),'push_type':pushType.decode('utf-8')}
             push_list.append(pushDict)
             push_counter = push_counter +1
 
         #print 'push_counter: ', str(push_counter)
         #print push_list
         return push_list
-'''
+
 # test bench
 tb = pushCrawler( 'https://www.ptt.cc/bbs/Test/M.1451105872.A.B9F.html')
 getDict = tb.get()
 print getDict
-print getDict[1]['push_content']
+print getDict[1]['push_type']
+'''
 '''
