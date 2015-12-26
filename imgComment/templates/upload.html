@@ -1,15 +1,41 @@
 {% extends 'base.html'%}
 {% block title %} Image Comment {%endblock%}
+
+{% block style %}
+<style type="text/css">
+.form-group p {
+	text-align: left;
+}
+.form-group p label{
+	font-size: 30px;
+	margin-bottom: 20px;
+}
+</style>
+{% endblock %}
+
 {% block content %}
 
-<h1>Upload</h1>
-<br>
-<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-  {{form.as_p}}
-  <div class="submit">
-    <input type="submit" value="Upload!!" class="btn btn-primary"/>
-  </div>
+<div class="header">
+    <nav>
+        <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="#" onclick="self.location.href='/index/'">首頁</a>
+            <li role="presentation" class="active"><a href="#" onclick="event.preventDefault()" style="cursor:default">上傳圖片</a>
+            <li role="presentation"><a href="#" onclick="self.location.href='/browse/'">瀏覽圖片</a>
+            <li role="presentation"><a href="#">關於我們</a>
+        </ul>
+    </nav>
+    <h3 class="text-muted">旁白沒有極限</h3>
+</div>
+<div class="jumbotron">
+	<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+		<div class="form-group">
+			{{form.as_p}}
+			<div class="submit">
+				<input type="submit" value="上傳" class="btn btn-primary"/>
+			</div>
+		</div>
+	</form>
+</div>
 
-</form>
 {%endblock%}
 
