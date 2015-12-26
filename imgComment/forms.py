@@ -8,7 +8,7 @@ class UploadFileForm(forms.Form):
     def clean_file(self):
         file = self.cleaned_data["file"]
         if not (file.name.lower().endswith(".png") or file.name.lower().endswith(".jpg")):
-            raise forms.ValidationError("The uploaded file is not an image file. "+file.name)
+            raise forms.ValidationError("The uploaded file is not an image file. ")
         return file
 
 class SaveImageForm(forms.Form):

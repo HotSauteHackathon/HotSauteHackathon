@@ -1,6 +1,7 @@
 import os
 import time
-import hashlib
+import string
+import random
 
 from imgComment.models import *
 
@@ -19,22 +20,13 @@ class FileHandler():
         self.mkdir(todayDir) # imgComment/upload/2015-12-18/
 
         # write the image file
-        hash_object = hashlib.md5(f.name.encode())
         fileType = "."+f.name.split(".")[-1]
-        tempFileName = os.path.join(todayDir,hash_object.hexdigest()+fileType)
+        tempFileName = os.path.join(todayDir,self.random_str()+'.'+fileType)
         with open(tempFileName, 'wb+') as destination:
             for chunk in f.chunks():
                 destination.write(chunk)
 
-##        # upload to imgur
-##        imgur = ImgurUploader()
-##        url = imgur.upload(tempFileName)
-
-        # store to DB
-        fileID = self.store(tempFileName)
-
-        return fileID
-
+        return tempFileName
 
     def mkdir(self,path):
         if os.path.isdir(path):
@@ -47,5 +39,6 @@ class FileHandler():
         self.image = Image.objects.create(origFile=imgFilePath)
         return self.image.id
 
-
+    def random_str(self,size=40, chars=string.ascii_letters + string.digits):
+        return ''.join(random.choice(chars) for _ in range(size))
 
