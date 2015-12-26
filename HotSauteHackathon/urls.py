@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^$',index),
     url(r'^index/$',index),
     url(r'^upload/$',upload),
-    url(r'^edit/$',edit),
+    url(r'^edit/(\d{1,10})/$',edit),
     url(r'^browse/$',browse),
     url(r'^comment/$',comment),
 ]
