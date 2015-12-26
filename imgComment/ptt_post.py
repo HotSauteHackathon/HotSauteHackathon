@@ -44,7 +44,7 @@ class ptt_post:
 	    self.telnet.write(('\033[A').encode("big5"))
 	    self.telnet.write(('\033[A').encode("big5"))
 	    self.telnet.write(('\033[A').encode("big5"))
-	 
+
 
 	def key_down(self):
 	    self.telnet.write(('\033[B').encode("big5"))
@@ -54,13 +54,13 @@ class ptt_post:
 
 	def key_left(self):
 
-	    self.telnet.write(('\033[D').encode("big5"))    
+	    self.telnet.write(('\033[D').encode("big5"))
 
 	def key_s(self):
-		self.telnet.write(('s').encode("big5")) 
+		self.telnet.write(('s').encode("big5"))
 
 	def key_0(self):
-		self.telnet.write(('0').encode("big5")) 
+		self.telnet.write(('0').encode("big5"))
 
 
 	def key_Q(self):
@@ -80,12 +80,12 @@ class ptt_post:
 	    self.key_left()
 	    self.key_left()
 
-	 
+
 	    self.telnet.write(('G\r').encode("big5"))
 	    login_status = self.telnet.read_until('[N]'.encode("big5"), 3)
-	 
+
 	    # print login_status
-	 
+
 	    self.telnet.write(('y\r\r').encode("big5"))
 
 	    self.telnet.close()
@@ -94,7 +94,7 @@ class ptt_post:
 		command_index = 0
 
 		# title_text = u'[互動] '+title_s.decode('utf8')
-		title_text = '[互動] '+title_s
+		title_text = u'[互動] '+title_s
 		# title = title_text.encode('big5')
 		title = title_text
 		# content_text = text_s.decode('utf8')
@@ -129,7 +129,7 @@ class ptt_post:
 			# print(data.encode("big5"))
 			# print("--------------")
 			if command == "_Q_":
-				temp_data = data.decode("big5") 
+				temp_data = data.decode("big5")
 				index_start = temp_data.find("https:")
 				index_end = temp_data.find(".html")+5
 				# print index_start, "  ", index_end
@@ -151,7 +151,7 @@ class ptt_post:
 					print(type(command))
 					temp = command+'\r'
 					print("----temp:"+temp)
-					temp = temp.decode('utf8').encode("big5")
+					temp = temp.encode("big5")
 					print(b"----temp:"+temp)
 					self.telnet.write(temp)
 

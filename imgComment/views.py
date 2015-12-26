@@ -42,13 +42,14 @@ def edit(request,fileID):
             imgur = ImgurUploader()
             imageUrl = imgur.upload(image.origFile)
 
-##            # automatically post
-##            ptt = ptt_post()
-##            postUrl = ptt.to_post(title,content,imageUrl)
+            # automatically post
+            ptt = ptt_post()
+            postUrl = ptt.to_post(title,content,imageUrl)
+            print "url = "+postUrl
 
             # update image object
             #image.editFile = imgFilePath
-            #image.postUrl = postUrl
+            image.postUrl = postUrl
             image.imageUrl = imageUrl
             image.title = title
             image.content = content
@@ -65,8 +66,16 @@ def browse(request):
 
 def comment(request,fileID):
     image = Image.objects.get(id=fileID)
-##    pc = pushCrwaler(image.postUrl)
-##    postList = pc.get()
+    comments = ["dd","sss"]
+    crawler = pushCrawler(image.postUrl)
+    postList = crawler.get()
+##    for post in postList:
+##        try:
+##            Comment.objects.get(username=post["pusher_name"],text=post["push_content"])
+##        except:
+##            print("not found")
+##            Comment.objects.create(image=image,text=post["push_content"],username=post["pusher_name"],commentType=post["push_type"],uploadTime=post["push_time"])
+    print postList
     return render_to_response('comment.html',RequestContext(request,locals()))
 
 

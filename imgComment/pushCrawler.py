@@ -38,9 +38,9 @@ class pushCrawler(object):
         return push_list
 
 # test bench
-tb = pushCrawler( 'https://www.ptt.cc/bbs/Test/M.1451105872.A.B9F.html')
-getDict = tb.get()
-print getDict
-print getDict[1]['push_type']
+##tb = pushCrawler( 'https://www.ptt.cc/bbs/Test/M.1451105872.A.B9F.html')
+##getDict = tb.get()
+##print getDict
+##print getDict[1]['push_type']
 '''
 '''
