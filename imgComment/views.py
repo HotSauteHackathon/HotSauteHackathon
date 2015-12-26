@@ -23,7 +23,15 @@ def upload(request):
     return render_to_response('upload.html',RequestContext(request,locals()))
 
 def edit(request,fileID):
-    image = Image.objects.get(id=fileID)
+    if request.method == 'POST':
+        # form = UploadFileForm(request.POST, request.FILES)
+        # if form.is_valid():
+        #     fh = FileHandler()
+        #     fileID = fh.handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/index/')
+    else:
+        image = Image.objects.get(id=fileID)
+        form = SaveImageForm()
     return render_to_response('edit.html',RequestContext(request,locals()))
 
 def browse(request):
