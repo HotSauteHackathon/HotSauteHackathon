@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
 from imgComment.fileHandler import FileHandler
-from imgComment.pttConnector import PttConnector
+from imgComment.ptt_post import ptt_post
+from imgComment.img_uploader import ImgurUploader
 from imgComment.models import *
 from imgComment.forms import *
 
@@ -41,8 +42,8 @@ def edit(request,fileID):
             imageUrl = imgur.upload(image.origFile)
 
             # automatically post
-            pc = PttConnector()
-            postUrl = pc.post(imageUrl,title,content)
+            ptt = ptt_post()
+            postUrl = ptt.to_post(title,content,imageUrl)
 
             # update image object
             image.editFile = imgFilePath
