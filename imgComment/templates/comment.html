@@ -28,8 +28,8 @@
 {%endblock%}
 
 {% block script %}
-<script>
-    var comments = ['hihi', 'haha', 'kerker'];
+<script  type="text/javascript">
+    var comments = {{ comments | safe}};
     var comments_nums = comments.length;
     var index = 0;
     $('h2').text(comments[index]);

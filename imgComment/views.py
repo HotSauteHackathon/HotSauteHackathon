@@ -66,7 +66,7 @@ def browse(request):
 
 def comment(request,fileID):
     image = Image.objects.get(id=fileID)
-    comments = ["dd","sss"]
+    comments = [str(comm.text) for comm in image.comment_set.all()]
     crawler = pushCrawler(image.postUrl)
     postList = crawler.get()
 ##    for post in postList:
@@ -75,7 +75,7 @@ def comment(request,fileID):
 ##        except:
 ##            print("not found")
 ##            Comment.objects.create(image=image,text=post["push_content"],username=post["pusher_name"],commentType=post["push_type"],uploadTime=post["push_time"])
-    print postList
+
     return render_to_response('comment.html',RequestContext(request,locals()))
 
 
