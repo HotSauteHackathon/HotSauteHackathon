@@ -5,11 +5,15 @@ import telnetlib
 import time
 import os
 
+"""
+usage:
+
+my_poster_object = ptt_post()
+return_url = my_poster_object.to_post(title,content, image_url)
+
+"""
 
 class ptt_post:
-
-	
-
 
 	def __init__(self):
 		self.telnet = telnetlib.Telnet()
