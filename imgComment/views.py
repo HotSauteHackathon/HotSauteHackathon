@@ -26,6 +26,7 @@ def upload(request):
     return render_to_response('upload.html',RequestContext(request,locals()))
 
 def edit(request,fileID):
+<<<<<<< HEAD
     image = Image.objects.get(id=fileID)
     if request.method == "POST":
         form = SaveImageForm(request.POST)
@@ -54,6 +55,7 @@ def edit(request,fileID):
             image.save()
             return HttpResponseRedirect('/comment/'+str(image.id)+"/")
     else:
+        image = Image.objects.get(id=fileID)
         form = SaveImageForm()
     return render_to_response('edit.html',RequestContext(request,locals()))
 
