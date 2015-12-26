@@ -3,6 +3,7 @@ import time
 import hashlib
 
 from imgComment.models import *
+from imgComment.img_uploader import ImgurUploader
 
 TEST_MANAGER_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -26,9 +27,9 @@ class FileHandler():
             for chunk in f.chunks():
                 destination.write(chunk)
 
-##        # upload to imgur
-##        imgur = ImgurUploader()
-##        url = imgur.upload(tempFileName)
+        # upload to imgur
+        imgur = ImgurUploader()
+        url = imgur.upload(tempFileName)
 
         # store to DB
         fileID = self.store(tempFileName)
