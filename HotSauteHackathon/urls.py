@@ -16,7 +16,16 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+admin.autodiscover()
+
+from imgComment.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$',index),
+    url(r'^index/$',index),
+    url(r'^upload/$',upload),
+    url(r'^edit/(\d{1,10})/$',edit),
+    url(r'^browse/$',browse),
+    url(r'^comment/$',comment),
 ]
