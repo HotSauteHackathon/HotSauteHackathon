@@ -46,8 +46,7 @@
 
 <canvas id="myCanvas" width="700px" height="394px"></canvas>
 <div id="backimageid" >
-    <img id="base-img" src="/static/img/0eb213c498956d25583179f60f703a5b.jpg" style="display: none">
-    <!-- <img id="base-img" src="{{ image.origFile }}"> -->
+    <img id="base-img" src="{% static partial_path %}" style="display: none">
     <div id="dialogid">
         <img src="/static/img/dialog_1.png" id="dl_1" style="display: none">
         <img src="/static/img/dialog_2.png" id="dl_2" style="display: none">
@@ -94,6 +93,10 @@
         imgObj.onload = function() {
             var img_height = imgObj.height;
             var img_width = imgObj.width;
+            if (img_width > 700) {
+                img_height = img_height * (700/img_width);
+                img_width = 700;
+            }
             canvas.setHeight(img_height);
             canvas.setWidth(img_width);
             canvas.setBackgroundImage('{% static partial_path %}', canvas.renderAll.bind(canvas), {
