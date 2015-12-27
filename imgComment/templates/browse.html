@@ -30,6 +30,7 @@
 
 	<tbody>
     {% for img in images %}
+    {% if img.imageUrl != "None" %}
     <tr>
         <!-- <td>{{img.id}}</td> -->
         <td>{{img.title}}</td>
@@ -42,6 +43,7 @@
         {% endif %}
         <td><a href="/comment/{{img.id}}/">View Comments</a></td>
     </tr>
+    {% endif %}
     {% endfor %}
 	</tbody>
 

@@ -44,6 +44,8 @@ def edit(request,fileID):
 ##            imgFilePath = fh.handle_uploaded_file(request.FILES['file'])
 
             # upload to imgur
+            image = Image.objects.get(id=fileID)
+
             imgur = ImgurUploader()
             imageUrl = imgur.upload(image.origFile)
 
@@ -77,6 +79,12 @@ def browse(request):
 
 def comment(request,fileID):
     image = Image.objects.get(id=fileID)
+
+    # image = Image.objects.get(id=fileID)
+    path = image.origFile
+    print(path)
+    temp_idx = path.find("static")+7
+    partial_path = path[temp_idx:]
 
     crawler = pushCrawler()
     postList = crawler.get(image.postUrl)

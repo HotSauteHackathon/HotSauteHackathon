@@ -23,6 +23,9 @@
     #base-img {
         width: 100%;
     }
+    .canvas-container {
+        margin: 0 auto;
+    }
 </style>
 {% endblock %}
 
@@ -85,20 +88,33 @@
 <script src="/static/js/fabric.min.js"></script>
 <script>
     $(function(){
-
         var canvas = new fabric.Canvas('myCanvas');
-        canvas.setBackgroundImage('{% static partial_path %}', canvas.renderAll.bind(canvas), {
-            height: canvas.height,
-            width: canvas.width 
-        });
+        var imgObj = new Image();
+        imgObj.src = '{% static partial_path %}';
+        imgObj.onload = function() {
+            var img_height = imgObj.height;
+            var img_width = imgObj.width;
+            canvas.setHeight(img_height);
+            canvas.setWidth(img_width);
+            canvas.setBackgroundImage('{% static partial_path %}', canvas.renderAll.bind(canvas), {
+                height: canvas.height,
+                width: canvas.width,
+            });
+        }
+
+        // var canvas = new fabric.Canvas('myCanvas');
+        // canvas.setBackgroundImage('{% static partial_path %}', canvas.renderAll.bind(canvas), {
+        //     height: canvas.height,
+        //     width: canvas.width 
+        // });
 
         $('#dialog_1').click(function(){
             // $('#dl_1').show();
             canvas.clear().renderAll();
             fabric.Image.fromURL('/static/img/dialog_1.png', function(img) {
                 img.scale(0.5).set({
-                    left: 150,
-                    top: 150,
+                    left: canvas.width / 2,
+                    top: canvas.height / 2,
                     angle: -15
                 });
                 canvas.add(img).setActiveObject(img);
@@ -112,8 +128,8 @@
             canvas.clear().renderAll();
             fabric.Image.fromURL('/static/img/dialog_2.png', function(img) {
                 img.scale(0.5).set({
-                    left: 250,
-                    top: 250,
+                    left: canvas.width / 2,
+                    top: canvas.height / 2,
                     angle: -15
                 });
                 canvas.add(img).setActiveObject(img);
@@ -127,8 +143,8 @@
             canvas.clear().renderAll();
             fabric.Image.fromURL('/static/img/dialog_3.png', function(img) {
                 img.scale(0.5).set({
-                    left: 350,
-                    top: 150,
+                    left: canvas.width / 2,
+                    top: canvas.height / 2,
                     angle: -15
                 });
                 canvas.add(img).setActiveObject(img);
