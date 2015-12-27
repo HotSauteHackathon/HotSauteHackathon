@@ -40,7 +40,7 @@ class pushCrawler(object):
 # test bench
 tb = pushCrawler( 'https://www.ptt.cc/bbs/Test/M.1451105872.A.B9F.html')
 getDict = tb.get()
-print getDict
-print getDict[1]['push_type']
+print(getDict)
+print(getDict[1]['push_type'])
 '''
 '''

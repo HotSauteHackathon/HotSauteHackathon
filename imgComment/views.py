@@ -42,9 +42,9 @@ def edit(request,fileID):
             imgur = ImgurUploader()
             imageUrl = imgur.upload(image.origFile)
 
-##            # automatically post
-##            ptt = ptt_post()
-##            postUrl = ptt.to_post(title,content,imageUrl)
+            # automatically post
+            ptt = ptt_post()
+            postUrl = ptt.to_post(title,content,imageUrl)
 
             # update image object
             #image.editFile = imgFilePath
