@@ -18,7 +18,7 @@ class ptt_post:
 	def __init__(self):
 		self.telnet = telnetlib.Telnet()
 		self.host = 'ptt.cc'
-		self.user = 'frankofranko'
+		self.user = 'PlayImage'
 		self.passwd = 'qlkza'
 		self.command_dic = {}
 		self.telnet.open(self.host)
@@ -27,6 +27,10 @@ class ptt_post:
 		self.command_dic['down'] = self.key_down
 		self.command_dic['up'] = self.key_up
 		self.command_dic['up3'] = self.key_up_3
+		self.command_dic['up2'] = self.key_up_2
+		self.command_dic['up2s'] = self.key_up2_s
+
+		self.delay = 0.0
 
 		self.command_dic['ctrl_p'] = self.key_control_p
 		self.command_dic['ctrl_x'] = self.key_control_x
@@ -34,6 +38,7 @@ class ptt_post:
 		self.command_dic['_0_'] = self.key_0
 		self.command_dic['_s_'] = self.key_s
 		self.command_dic['_Q_'] = self.key_Q
+		self.command_dic['last4'] = self.key_last_4
 
 
 	def key_up(self):
@@ -44,6 +49,21 @@ class ptt_post:
 	    self.telnet.write(('\033[A').encode("big5"))
 	    self.telnet.write(('\033[A').encode("big5"))
 	    self.telnet.write(('\033[A').encode("big5"))
+
+	def key_up_2(self):
+		self.telnet.write(('\033[A').encode("big5"))
+		self.telnet.write(('\033[A').encode("big5"))
+
+	def key_up2_s(self):
+		self.key_up_2()
+		self.key_s()
+
+	def key_last_4(self):
+		# 'up','11111','up3','_Q_'
+		self.key_right()
+		self.telnet.write('11111\r'.encode("big5"))
+		self.key_up_3()
+		self.key_Q()
 
 
 	def key_down(self):
@@ -106,7 +126,7 @@ class ptt_post:
 		# url = url_s.encode('big5')
 		url = url_s
 
-		command_lst = ['PlayImage','qlkza',' ','up','up','_s_','test','up','up','ctrl_p',' ',title,content,url,'ctrl_x','s','up','11111','up3','_Q_']
+		command_lst = [self.user,self.passwd,' ','up2s','test','up2','ctrl_p',' ',title,content,url,'ctrl_x','s','last4']
 
 
 		run_mode = True
@@ -120,16 +140,17 @@ class ptt_post:
 		url = "no found"
 
 		while True:
-			time.sleep(0.35)
+			time.sleep(self.delay)
 			data = self.telnet.read_until(b'fejif', 3)
 			# data = telnet.read_eager()
 			# data = telnet.read_some()
-			os.system('clear')
+			# os.system('clear')
 
 			# print("--------------")
 			# print(data.encode("big5"))
 			# print("--------------")
-			if command == "_Q_":
+			# if command == "_Q_":
+			if command_index==len(command_lst):
 				temp_data = data.decode("big5")
 				index_start = temp_data.find("https:")
 				index_end = temp_data.find(".html")+5
@@ -151,11 +172,11 @@ class ptt_post:
 				else:
 					print(type(command))
 					temp = command+'\r'
-					print("----temp:"+temp)
+					print("----temp:"+temp.encode("big5"))
 
 					temp = temp.encode("big5")
-					print(b"----temp:"+temp)
+					# print(b"----temp:"+temp)
 					self.telnet.write(temp)
 
-#poster = ptt_post()
-#print(poster.to_post("編號1","this is test content. 測試資料","http://i.imgur.com/1GcDKFv.jpg"))
+# poster = ptt_post()
+# print(poster.to_post("編號1.5","this is test content. 測試資料","http://i.imgur.com/1GcDKFv.jpg"))
