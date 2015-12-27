@@ -48,7 +48,7 @@ def edit(request,fileID):
 
             # update image object
             #image.editFile = imgFilePath
-            #image.postUrl = postUrl
+            image.postUrl = postUrl
             image.imageUrl = imageUrl
             image.title = title
             image.content = content
@@ -65,12 +65,19 @@ def browse(request):
 
 def comment(request,fileID):
     image = Image.objects.get(id=fileID)
-    #comments = [comm.text for comm in image.comment_set.all()]
-    comments = ["dd","sss"]
 
-##    pc = pushCrwaler(image.postUrl)
-##    postList = pc.get()
+    crawler = pushCrawler()
+    postList = crawler.get(image.postUrl)
+
+    # TODO store the postList to the DB
+
+
+    comments = [str(comm.text) for comm in image.comment_set.all()]
+
     return render_to_response('comment.html',RequestContext(request,locals()))
-    #return render_template_to_response('comment.html',{"comments":comments})
+
+
+
+
 
 

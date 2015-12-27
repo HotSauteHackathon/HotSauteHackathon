@@ -16,21 +16,24 @@
 <div class="jumbotron">
     <p class="lead">快來看看鄉民們設計了什麼對白！
 </div>
-<table class = "browse_images" rules="all" cellpadding='5'>
+<table class="browse_images table table-bordered table-striped" rules="all" cellpadding='5'>
+    <thead>
     <tr>
-        <th>image id</th>
-        <th>title</th>
-        <th>content</th>
-        <th>upload time</th>
-        <th>image url</th>
-        <th>comments</th>
+        <!-- <th>流水號</th> -->
+        <th>標題</th>
+        <!-- <th>content</th> -->
+        <th>上傳時間</th>
+        <th>圖片連結</th>
+        <th>查看設計旁白</th>
     </tr>
+	</thead>
 
+	<tbody>
     {% for img in images %}
     <tr>
-        <td>{{img.id}}</td>
+        <!-- <td>{{img.id}}</td> -->
         <td>{{img.title}}</td>
-        <td>{{img.content}}</td>
+        <!-- <td>{{img.content}}</td> -->
         <td>{{img.uploadTime}}</td>
         {% if img.imageUrl == "None" %}
             <td>None</td>
@@ -40,33 +43,8 @@
         <td><a href="/comment/{{img.id}}/">View Comments</a></td>
     </tr>
     {% endfor %}
+	</tbody>
 
 </table>
-<div class="row marketing">
-
-    <div class="col-lg-4">
-        <a href="#"><h4 style="font-weight: bold; text-align: center">圖片標題</h4></a>
-    </div>
-    <div class="col-lg-4">
-        <a href="#"><h4 style="font-weight: bold; text-align: center">圖片標題</h4></a>
-    </div>
-    <div class="col-lg-4">
-        <a href="#"><h4 style="font-weight: bold; text-align: center">圖片標題</h4></a>
-    </div>
-    <div class="col-lg-4">
-        <a href="#"><h4 style="font-weight: bold; text-align: center">圖片標題</h4></a>
-    </div>
-    <div class="col-lg-4">
-        <a href="#"><h4 style="font-weight: bold; text-align: center">圖片標題</h4></a>
-    </div>
-    <div class="col-lg-4">
-        <a href="#"><h4 style="font-weight: bold; text-align: center">圖片標題</h4></a>
-    </div>
-    <div class="col-lg-4">
-        <a href="#"><h4 style="font-weight: bold; text-align: center">圖片標題</h4></a>
-    </div>
-
-</div>
-
 
 {%endblock%}
