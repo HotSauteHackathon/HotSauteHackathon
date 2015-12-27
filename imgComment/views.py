@@ -21,13 +21,18 @@ def upload(request):
             fh = FileHandler()
             imgFilePath = fh.handle_uploaded_file(request.FILES['file'])
             image = Image.objects.create(origFile=imgFilePath)
+            # print("file path: ", imgFilePath)
+            # temp_idx = imgFilePath.find("static/")+7
+            # partial_path = imgFilePath[temp_idx:]
+            # print("partial path: ", partial_path)
             return HttpResponseRedirect('/edit/'+str(image.id)+"/")
     else:
         form = UploadFileForm()
     return render_to_response('upload.html',RequestContext(request,locals()))
 
 def edit(request,fileID):
-    image = Image.objects.get(id=fileID)
+    
+
     if request.method == "POST":
         form = SaveImageForm(request.POST)
         if form.is_valid():
@@ -57,6 +62,12 @@ def edit(request,fileID):
     else:
         image = Image.objects.get(id=fileID)
         form = SaveImageForm()
+        # image = Image.objects.get(id=fileID)
+        path = image.origFile
+        temp_idx = path.find("static/")+7
+        partial_path = path[temp_idx:]
+
+        print("partial path: ", partial_path)
     return render_to_response('edit.html',RequestContext(request,locals()))
 
 def browse(request):

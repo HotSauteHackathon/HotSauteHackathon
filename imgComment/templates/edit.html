@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 {% block title %} Image Comment {%endblock%}
 {% block content %}
+{% load staticfiles %}
 
 <div class="header">
     <nav>
@@ -13,7 +14,9 @@
     </nav>
     <h3 class="text-muted">旁白沒有極限</h3>
 </div>
-<img src="/static/img/0eb213c498956d25583179f60f703a5b.jpg" style="width: 100%">
+<!-- <img src="/static/img/0eb213c498956d25583179f60f703a5b.jpg" style="width: 100%"> -->
+<img src="{% static partial_path %}" style="width: 100%">
+<!-- partial_path -->
 <!-- <img src="\imgComment\upload\0eb213c498956d25583179f60f703a5b.jpg" style="width: 100%"> -->
 <!-- <img src="{{ image.origFile }}"> -->
 <div class="jumbotron">
