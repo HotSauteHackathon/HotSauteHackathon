@@ -15,4 +15,5 @@ class Comment(models.Model):
     text = models.CharField(max_length = 200,default="None")
     username = models.CharField(max_length = 20,default="None")
     commentType = models.CharField(max_length = 10,default="None")
-    uploadTime = models.DateTimeField(blank=True)
+    #uploadTime = models.DateTimeField(blank=True)
+    publishTime = models.CharField(max_length = 100,default="None")

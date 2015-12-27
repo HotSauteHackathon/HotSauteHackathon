@@ -44,6 +44,7 @@ class pushCrawler(object):
 
 # test bench
 
+'''
 import datetime
 
 tb = pushCrawler()
@@ -51,9 +52,15 @@ getDict = tb.get('https://www.ptt.cc/bbs/Test/M.1451105872.A.B9F.html')
 print getDict
 print getDict[1]['push_type']
 print getDict[1]['push_time']
-'''
+
 newtime =   datetime.datetime.strptime(getDict[1]['push_time'], "%m/%d/%Y %H:%M")
 print "newtime = ",newtime
 print type(newtime)
 
+
+tb = pushCrawler()
+getDict = tb.get('https://www.ptt.cc/bbs/Test/M.1451105872.A.B9F.html')
 '''
+##print getDict
+##print getDict[1]['push_type']
+##print getDict[1]['push_time']

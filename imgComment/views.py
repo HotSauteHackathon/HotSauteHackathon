@@ -45,7 +45,6 @@ def edit(request,fileID):
             # automatically post
             ptt = ptt_post()
             postUrl = ptt.to_post(title,content,imageUrl)
-            print "url = "+postUrl
 
             # update image object
             #image.editFile = imgFilePath
@@ -66,16 +65,13 @@ def browse(request):
 
 def comment(request,fileID):
     image = Image.objects.get(id=fileID)
+
+    crawler = pushCrawler()
+    postList = crawler.get(image.postUrl)
+
+    # TODO store the postList to the DB
+
+
     comments = [str(comm.text) for comm in image.comment_set.all()]
-    crawler = pushCrawler(image.postUrl)
-    postList = crawler.get()
-##    for post in postList:
-##        try:
-##            Comment.objects.get(username=post["pusher_name"],text=post["push_content"])
-##        except:
-##            print("not found")
-##            Comment.objects.create(image=image,text=post["push_content"],username=post["pusher_name"],commentType=post["push_type"],uploadTime=post["push_time"])
 
     return render_to_response('comment.html',RequestContext(request,locals()))
-
-
