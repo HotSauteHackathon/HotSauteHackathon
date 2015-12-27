@@ -1,5 +1,31 @@
 {% extends 'base.html'%}
 {% block title %} Image Comment {%endblock%}
+
+{% block style %}
+<style type="text/css">
+    .dialog-container {
+        cursor: pointer;
+    }
+    .dialog-img {
+        max-width:100%;
+        max-height:100%;
+    }
+    #backimageid {
+        position: relative;
+    }
+    #dialogid {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 45px;
+        height: 45px;
+    }
+    #base-img {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 {% load staticfiles %}
 
@@ -14,20 +40,102 @@
     </nav>
     <h3 class="text-muted">旁白沒有極限</h3>
 </div>
-<!-- <img src="/static/img/0eb213c498956d25583179f60f703a5b.jpg" style="width: 100%"> -->
-<img src="{% static partial_path %}" style="width: 100%">
-<!-- partial_path -->
-<!-- <img src="\imgComment\upload\0eb213c498956d25583179f60f703a5b.jpg" style="width: 100%"> -->
-<!-- <img src="{{ image.origFile }}"> -->
-<div class="jumbotron">
-	<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-		<div class="form-group">
-			{{form.as_p}}
-			<div class="submit">
-				<input type="submit" value="確認送出" class="btn btn-primary"/>
-			</div>
-		</div>
-	</form>
+
+<canvas id="myCanvas" width="700px" height="394px"></canvas>
+<div id="backimageid" >
+    <img id="base-img" src="/static/img/0eb213c498956d25583179f60f703a5b.jpg" style="display: none">
+    <!-- <img id="base-img" src="{{ image.origFile }}"> -->
+    <div id="dialogid">
+        <img src="/static/img/dialog_1.png" id="dl_1" style="display: none">
+        <img src="/static/img/dialog_2.png" id="dl_2" style="display: none">
+        <img src="/static/img/dialog_3.png" id="dl_3" style="display: none">
+    </div>
 </div>
+
+<div>
+<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <br>
+    <div class="jumbotron" >
+        <p>請選擇欲加上的對話框</p>
+        <div class="row marketing">
+            <div class="col-xs-4 dialog-container" id="dialog_1">
+                <img class="dialog-img" src="/static/img/dialog_1.png">
+            </div>
+            <div class="col-xs-4 dialog-container" id="dialog_2">
+                <img class="dialog-img" src="/static/img/dialog_2.png">
+            </div>
+            <div class="col-xs-4 dialog-container" id="dialog_3">
+                <img class="dialog-img" src="/static/img/dialog_3.png">
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            {{form.as_p}}
+            <div class="submit">
+                <input type="submit" value="確認送出" class="btn btn-success"/>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+{%endblock%}
+
+{% block script %}
+<script src="/static/js/fabric.min.js"></script>
+<script>
+    $(function(){
+
+        var canvas = new fabric.Canvas('myCanvas');
+        canvas.setBackgroundImage('{% static partial_path %}', canvas.renderAll.bind(canvas), {
+            height: canvas.height,
+            width: canvas.width 
+        });
+
+        $('#dialog_1').click(function(){
+            // $('#dl_1').show();
+            canvas.clear().renderAll();
+            fabric.Image.fromURL('/static/img/dialog_1.png', function(img) {
+                img.scale(0.5).set({
+                    left: 150,
+                    top: 150,
+                    angle: -15
+                });
+                canvas.add(img).setActiveObject(img);
+            });
+            $('#dl_2').hide();
+            $('#dl_3').hide();
+        })
+        $('#dialog_2').click(function(){
+            $('#dl_1').hide();
+            // $('#dl_2').show();
+            canvas.clear().renderAll();
+            fabric.Image.fromURL('/static/img/dialog_2.png', function(img) {
+                img.scale(0.5).set({
+                    left: 250,
+                    top: 250,
+                    angle: -15
+                });
+                canvas.add(img).setActiveObject(img);
+            });
+            $('#dl_3').hide();
+        })
+        $('#dialog_3').click(function(){
+            $('#dl_1').hide();
+            $('#dl_2').hide();
+            // $('#dl_3').show();
+            canvas.clear().renderAll();
+            fabric.Image.fromURL('/static/img/dialog_3.png', function(img) {
+                img.scale(0.5).set({
+                    left: 350,
+                    top: 150,
+                    angle: -15
+                });
+                canvas.add(img).setActiveObject(img);
+            });
+        })
+    })
+
+</script>
 
 {%endblock%}

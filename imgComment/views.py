@@ -64,7 +64,8 @@ def edit(request,fileID):
         form = SaveImageForm()
         # image = Image.objects.get(id=fileID)
         path = image.origFile
-        temp_idx = path.find("static/")+7
+        print(path)
+        temp_idx = path.find("static")+7
         partial_path = path[temp_idx:]
 
         print("partial path: ", partial_path)
