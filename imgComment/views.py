@@ -53,7 +53,7 @@ def edit(request,fileID):
             image.title = title
             image.content = content
             image.save()
-            return HttpResponseRedirect('/comment/'+str(image.id)+"/")
+            return HttpResponseRedirect('/browse/')
     else:
         image = Image.objects.get(id=fileID)
         form = SaveImageForm()
