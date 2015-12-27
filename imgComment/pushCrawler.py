@@ -7,6 +7,7 @@ output: Lists of pusher_name, push_time, push_content
 import re
 import urllib
 import codecs # usding for chinese utf-8
+import datetime
 
 #ptt filehandler
 class pushCrawler(object):
@@ -24,14 +25,14 @@ class pushCrawler(object):
             #<span class="push-ipdatetime"> 12/26 12:58
             pushTime = re.findall('push-ipdatetime">(.+)',floor)[0]
             formatedTime = (pushTime.split()[0]+'/'+year[0]+' '+pushTime.split()[1]) #12/26/2016 12:58
-
+            newTime =   datetime.datetime.strptime(formatedTime, "%m/%d/%Y %H:%M")
             # push-content">: 你好</span>
             pushContent = re.findall('push-content">: (.+?)</span',floor)[0]
             # push-tag">推 </span>
             pushType = re.findall('push-tag">(.+?) <',floor)[0]
 
             pushDict = {'pusher_name':pusherName,
-            'push_time':formatedTime,
+            'push_time':newTime,
             'push_content':pushContent.decode('utf-8'),
             'push_type':pushType.decode('utf-8')}
             push_list.append(pushDict)
@@ -43,8 +44,23 @@ class pushCrawler(object):
 
 # test bench
 
+'''
+import datetime
+
 tb = pushCrawler()
 getDict = tb.get('https://www.ptt.cc/bbs/Test/M.1451105872.A.B9F.html')
+print getDict
+print getDict[1]['push_type']
+print getDict[1]['push_time']
+
+newtime =   datetime.datetime.strptime(getDict[1]['push_time'], "%m/%d/%Y %H:%M")
+print "newtime = ",newtime
+print type(newtime)
+
+
+tb = pushCrawler()
+getDict = tb.get('https://www.ptt.cc/bbs/Test/M.1451105872.A.B9F.html')
+'''
 ##print getDict
 ##print getDict[1]['push_type']
 ##print getDict[1]['push_time']
