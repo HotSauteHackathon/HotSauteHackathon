@@ -13,7 +13,7 @@ class FileHandler():
 
     def handle_uploaded_file(self,f):
         # handle uploaded file
-        uploadDir = os.path.join(TEST_MANAGER_DIR,'upload')
+        uploadDir = os.path.join(TEST_MANAGER_DIR,'static')
         self.mkdir(uploadDir) # imgComment/upload/
         uploadTime = time.localtime(time.time())
         todayDir = os.path.join(uploadDir,time.strftime("%Y-%m-%d",uploadTime))
