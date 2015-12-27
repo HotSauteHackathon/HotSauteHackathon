@@ -33,7 +33,7 @@ class pushCrawler(object):
 
             pushDict = {'pusher_name':pusherName,
             'push_time':newTime,
-            'push_content':pushContent.decode('utf-8'),
+            'push_content':pushContent,
             'push_type':pushType.decode('utf-8')}
             push_list.append(pushDict)
             push_counter = push_counter +1

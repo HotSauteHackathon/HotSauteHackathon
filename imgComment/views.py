@@ -88,14 +88,17 @@ def comment(request,fileID):
 
     crawler = pushCrawler()
     postList = crawler.get(image.postUrl)
-
+    comments = []
     for p in postList:
+        temp = "%s" % p["push_content"].decode('utf-8').encode('big5')
+        print type(temp), temp
+        comments.append(temp)
         try:
             comment = Comment.objects.get(username=p["pusher_name"],text=p["push_content"],commentType=p["push_type"])
         except Comment.DoesNotExist as e:
             Comment.objects.create(image = image,username=p["pusher_name"],text=p["push_content"],commentType=p["push_type"],publishTime=p["push_time"])
 
-    comments = [str(comm.text) for comm in image.comment_set.all()]
+    #comments = [str(comm.text) for comm in image.comment_set.all()]
 
     return render_to_response('comment.html',RequestContext(request,locals()))
 
